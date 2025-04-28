@@ -32,7 +32,7 @@ As a first step, we group network flows or connections based on their similariti
 
 After clustering, we analyze the characteristics of each cluster. For example, one cluster might consist of flows with short durations and small packet sizes, potentially indicating control traffic. Another cluster might have long durations and large byte counts, suggesting data transfer. By examining the IP addresses and port numbers within each cluster, we start to infer which applications might be involved.
 
-#### Dimensionality Reduction:
+### Dimensionality Reduction
 
 In a second step, we reduce the number of features extracted from the PCAP data while preserving the most important information. This helps to visualize complex communication patterns in a lower-dimensional space and make clustering more effective.
 
