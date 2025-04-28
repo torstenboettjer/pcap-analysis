@@ -19,7 +19,7 @@ Tools like Wireshark are invaluable for analyzing PCAP files. They provide power
 
 Analyzing a PCAP file and focusing on Layer 3 protocols, cloud engineers extract a wealth of logical identifiers that help understand the network topology, communication patterns, and the identities of the communicating devices. However, these are logical identifiers; mapping them to physical machines often requires additional context or correlation with other information like ARP tables or network inventory data.
 
-[More Details](../pysical_topology.md)
+![More Details](https://github.com/torstenboettjer/pcap-analysis/blob/main/docs/physical_topology.md)
 
 ## Workbench
 Analyse PCAP files to identify deployment artifact types in a data center network. Main programming language is Python, virtual environments rely on [automatic shell activation](https://devenv.sh/automatic-shell-activation/) using devenv.sh and direnv.
