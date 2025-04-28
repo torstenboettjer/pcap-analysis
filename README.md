@@ -40,7 +40,8 @@ In a second step, we reduce the number of features extracted from the PCAP data 
 * **Principal Component Analysis (PCA)** Finds the principal components (directions of maximum variance) in the data.
 * **t-distributed Stochastic Neighbor Embedding (t-SNE)** A non-linear dimensionality reduction technique particularly good at visualizing high-dimensional data in 2D or 3D, often revealing natural groupings.
 * **UMAP (Uniform Manifold Approximation and Projection)** Another non-linear technique that often produces better global structure preservation than t-SNE and can be faster.
-* **Interpretation** Visualizing the reduced data can reveal clusters or distinct groups of communication patterns that might not be obvious in the high-dimensional feature space. You can then investigate the original features of these groups to understand the underlying communication characteristics.  
+
+Visualizing the reduced data can reveal clusters or distinct groups of communication patterns that might not be obvious in the high-dimensional feature space. You can then investigate the original features of these groups to understand the underlying communication characteristics.  
 
 ## Anomaly Detection
 
