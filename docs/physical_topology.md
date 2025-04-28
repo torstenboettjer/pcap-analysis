@@ -9,14 +9,14 @@ Basic IP information is related to common network protocols, in order to underst
 
 ## Extracting host identifiers
 
-Tools like Wireshark are invaluable for analyzing PCAP files. They provide powerful filtering and dissection capabilities to examine the headers and payloads of different Layer 3 protocols:  
+Network Tools like [Wireshark](https://www.wireshark.org/) and [scapy](https://scapy.net/) provide filtering and dissection capabilities to examine the headers and payloads of different Layer 3 protocols:
 
 * **Filtering by Protocol** allow to filter the capture to focus on specific Layer 3 protocols (e.g., ip, icmp, arp, ospf, bgp, igmp).
 * **Examining Packet Details** that dissects the headers of each protocol, allowing you to easily view the source and destination IP addresses, protocol-specific fields, and payload data.
 * **Following Streams** for connection-oriented protocols (though less common at pure Layer 3), you can follow streams to see the sequence of packets exchanged between specific logical endpoints.
-* **Using Display Filters** create more complex filters to look for packets containing specific IP addresses or within certain IP ranges.  
+* **Using Display Filters** create more complex filters to look for packets containing specific IP addresses or within certain IP ranges.
 
-Analyzing a PCAP file and focusing on Layer 3 protocols, cloud engineers extract a wealth of logical identifiers that help understand the network topology, communication patterns, and the identities of the communicating devices. However, these are logical identifiers; mapping them to physical machines often requires additional context or correlation with other information like ARP tables or network inventory data.
+Cloud engineers extract logical identifiers to understand the network topology, communication patterns, and the identities of the communicating devices. However, these are logical identifiers; mapping them to physical machines often requires additional context or correlation with other information like ARP tables or network inventory data.
 
 # Network Topology
 
@@ -32,10 +32,10 @@ These protocols are used by routers to exchange routing information. Their packe
 
 ### Multicast Protocols (e.g., IGMP, PIM)
 
-* **IGMP (Internet Group Management Protocol)** is used by hosts to join and leave multicast groups. IGMP messages contain the multicast group IP address (a logical identifier for a group of hosts). Examining IGMP reports and queries in a PCAP file shows which hosts are interested in which multicast groups.  
-* **PIM (Protocol Independent Multicast)** os used by routers to manage multicast traffic. PIM packets contain information about multicast sources and groups, again involving logical IP addresses.  
+* **IGMP (Internet Group Management Protocol)** is used by hosts to join and leave multicast groups. IGMP messages contain the multicast group IP address (a logical identifier for a group of hosts). Examining IGMP reports and queries in a PCAP file shows which hosts are interested in which multicast groups.
+* **PIM (Protocol Independent Multicast)** os used by routers to manage multicast traffic. PIM packets contain information about multicast sources and groups, again involving logical IP addresses.
 * **Network Management Protocols (e.g., SNMP)** operate at the Application Layer (Layer 7), it often relies on UDP (Layer 4) and ultimately IP (Layer 3) for transport. The payload of SNMP packets (PDUs - Protocol Data Units) contains managed object information, which frequently includes logical identifiers like IP addresses, interface names, and system descriptions. Analyzing SNMP Get, Set, and Trap packets can reveal these identifiers associated with network devices.
-* **Tunneling Protocols (e.g., GRE, IPsec)** encapsulate other packets within IP packets to create tunnels. The outer IP header contains the source and destination IP addresses of the tunnel endpoints (logical identifiers of the devices establishing the tunnel). Examining the encapsulated payload might reveal further logical identifiers from the original packets.  
+* **Tunneling Protocols (e.g., GRE, IPsec)** encapsulate other packets within IP packets to create tunnels. The outer IP header contains the source and destination IP addresses of the tunnel endpoints (logical identifiers of the devices establishing the tunnel). Examining the encapsulated payload might reveal further logical identifiers from the original packets.
 
 ### ARP (Address Resolution Protocol)
 
