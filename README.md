@@ -1,25 +1,57 @@
 # PCAP Analysis
 
-This project aims to automate the process of identifying the most suitable deployment model for a workload when migrating solutions from an existing data center to a hybrid cloud. After capturing the network traffic we aim to extract logical identifiers that help to define the right deployment model for a workload in a hybrid cloud, by analyzing the PCAP file and understanding the network topology, communication patterns, and the identities of the communicating devices. We focus our analysis on the IP protocol, the fundamental Layer 3 protocol. IP addresses are the primary logical identifiers at Layer 3 and are present in virtually every packet captured in a PCAP file that involves IP communication. The IP header itself contains crucial logical identifiers:   
+This project aims to automate the process of identifying the most suitable deployment model for a workload when migrating solutions from an existing data center to a hybrid cloud. We employ unsupervised learning techniques to analyze PCAP (Packet Capture) files, which contain network traffic data, to extract logical identifiers that help define the right deployment model.
 
-* **Source IP Address** identifies the sender of the packet.   
-* **Destination IP Address** Identifies the intended recipient of the packet.
+## Workflow
 
-Basic IP information is related to common network protocols, in order to understand the context for specific communication patterns.
+1. **Data Collection** Capture relevant PCAP data from the data center network.
+2. **Feature Extraction** Extract meaningful features from the network flows or packets. [More Details](https://github.com/torstenboettjer/pcap-analysis/blob/main/docs/physical_topology.md)
+3. **Data Preprocessing** Clean and preprocess the extracted features (e.g., scaling, normalization) to ensure that algorithms work effectively.
+4. **Model Selection and Training** Choose appropriate unsupervised learning algorithms based on your goals (clustering, dimensionality reduction, anomaly detection). Train the models on the preprocessed data.
+5. **Result Interpretation** Analyze the output of the unsupervised learning algorithms (clusters, reduced dimensions, anomalies). This often involves visualizing the results and examining the characteristics of the identified patterns.
+6. **Validation and Refinement** Evaluate the quality of the discovered patterns (e.g., using domain knowledge or by looking for consistency). Refine the feature extraction and model parameters as needed.
 
+The analysis focuses on the IP protocol, a fundamental Layer 3 protocol, to understand network topology, communication patterns, and the identities of communicating devices. The project utilizes tools like Wireshark for packet analysis and Python for implementing unsupervised learning algorithms. The following techniques are employed to analyze the PCAP data:
 
-## Extracting host identifiers
+### Clustering
 
-Tools like Wireshark are invaluable for analyzing PCAP files. They provide powerful filtering and dissection capabilities to examine the headers and payloads of different Layer 3 protocols:   
+As a first step, we group network flows or connections based on their similarities without knowing the application types beforehand. We extract various features from the PCAP data at the flow level (a flow is typically defined by a 5-tuple: source IP, destination IP, source port, destination port, protocol) and potentially packet-level statistics. Examples of features include:
+* Number of packets in the flow
+* Total bytes transferred in the flow
+* Flow duration
+* Packets per second
+* Bytes per second
+* Inter-arrival times of packets
+* TCP flags (SYN, ACK, FIN, RST)  
+* Distribution of packet sizes
 
-* **Filtering by Protocol** allow to filter the capture to focus on specific Layer 3 protocols (e.g., ip, icmp, arp, ospf, bgp, igmp).
-* **Examining Packet Details** that dissects the headers of each protocol, allowing you to easily view the source and destination IP addresses, protocol-specific fields, and payload data.
-* **Following Streams** for connection-oriented protocols (though less common at pure Layer 3), you can follow streams to see the sequence of packets exchanged between specific logical endpoints.
-* **Using Display Filters** create more complex filters to look for packets containing specific IP addresses or within certain IP ranges.   
+#### Algorithms
+* **K-Means** Groups flows into a predefined number of clusters based on minimizing the within-cluster variance, found by experimenting with the number of clusters.
+* **Hierarchical Clustering** Creates a hierarchy of clusters, allowing us to explore patterns at different levels of granularity.
+* **DBSCAN** Density-Based Spatial Clustering of Applications with Noise. It can discover clusters of arbitrary shapes and identify outliers (anomalous communication).
 
-Analyzing a PCAP file and focusing on Layer 3 protocols, cloud engineers extract a wealth of logical identifiers that help understand the network topology, communication patterns, and the identities of the communicating devices. However, these are logical identifiers; mapping them to physical machines often requires additional context or correlation with other information like ARP tables or network inventory data.
+After clustering, we analyze the characteristics of each cluster. For example, one cluster might consist of flows with short durations and small packet sizes, potentially indicating control traffic. Another cluster might have long durations and large byte counts, suggesting data transfer. By examining the IP addresses and port numbers within each cluster, we start to infer which applications might be involved.
 
-[More Details](https://github.com/torstenboettjer/pcap-analysis/blob/main/docs/physical_topology.md)
+#### Dimensionality Reduction:
+
+In a second step, we reduce the number of features extracted from the PCAP data while preserving the most important information. This helps to visualize complex communication patterns in a lower-dimensional space and make clustering more effective.
+
+#### Algorithms
+* **Principal Component Analysis (PCA)** Finds the principal components (directions of maximum variance) in the data.
+* **t-distributed Stochastic Neighbor Embedding (t-SNE)** A non-linear dimensionality reduction technique particularly good at visualizing high-dimensional data in 2D or 3D, often revealing natural groupings.
+* **UMAP (Uniform Manifold Approximation and Projection)** Another non-linear technique that often produces better global structure preservation than t-SNE and can be faster.
+* **Interpretation** Visualizing the reduced data can reveal clusters or distinct groups of communication patterns that might not be obvious in the high-dimensional feature space. You can then investigate the original features of these groups to understand the underlying communication characteristics.  
+
+### Anomaly Detection
+
+As part of the analysis we identify unusual or unexpected communication patterns that deviate significantly from the norm. This can help detect security breaches, misconfigurations, or performance issues.
+
+#### Algorithms
+* **Isolation Forest** Identifies anomalies by isolating instances that are "easy" to separate from the rest of the data.
+* **One-Class SVM** Learns a boundary around the "normal" data and identifies instances outside this boundary as anomalies.
+* **Autoencoders (Neural Networks)** Train a neural network to reconstruct the input data. Anomalous data points will have a higher reconstruction error.
+
+Detected anomalies highlight unusual communication flows that warrant further investigation. By examining the features of these anomalous flows (e.g., unusual ports, high traffic volume to a specific IP), we gain insights into potential issues or novel application interactions.  
 
 ## Workbench
 Analyse PCAP files to identify deployment artifact types in a data center network. Main programming language is Python, virtual environments rely on [automatic shell activation](https://devenv.sh/automatic-shell-activation/) using devenv.sh and direnv.
