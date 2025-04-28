@@ -50,7 +50,7 @@ The first few octets of a MAC address (Organizationally Unique Identifier - OUI)
 
 Many network scanning and discovery tools utilize ARP to identify active devices on a local network and retrieve their MAC addresses along with their IP addresses and sometimes hostnames. Tools like arp -a (on most operating systems), nmap, and various commercial network management platforms leverage ARP for this purpose.  
 
-### Noise and Anomalies
+## Noise and Anomalies
 
 Working with logical identifier, we must also consider the noise and anomalies that can occur in a data center network. For example, duplicate IP addresses, rogue devices, or misconfigured network interfaces can lead to incorrect mappings or unexpected behavior. Network monitoring tools can help identify these issues by analyzing traffic patterns and device behavior.
 
