@@ -7,6 +7,17 @@ layer 3 protocols, particularly ARP, can be leveraged to identify machines on a 
 
 Layer 3 protocols primarily deal with logical addressing, ARP provides a crucial link to the physical MAC address of a network interface.
 
+### Routing Protocols (e.g., OSPF, BGP, RIP)
+
+These protocols are used by routers to exchange routing information. Their packet payloads contain details about network topology, advertised routes, and neighbor relationships, which inherently include logical network identifiers (IP addresses of routers, network prefixes). Analyzing these packets can reveal the logical organization of the network.   
+
+### Multicast Protocols (e.g., IGMP, PIM)
+
+* **IGMP (Internet Group Management Protocol)** is used by hosts to join and leave multicast groups. IGMP messages contain the multicast group IP address (a logical identifier for a group of hosts). Examining IGMP reports and queries in a PCAP file shows which hosts are interested in which multicast groups.   
+* **PIM (Protocol Independent Multicast)** os used by routers to manage multicast traffic. PIM packets contain information about multicast sources and groups, again involving logical IP addresses.   
+* **Network Management Protocols (e.g., SNMP)** operate at the Application Layer (Layer 7), it often relies on UDP (Layer 4) and ultimately IP (Layer 3) for transport. The payload of SNMP packets (PDUs - Protocol Data Units) contains managed object information, which frequently includes logical identifiers like IP addresses, interface names, and system descriptions. Analyzing SNMP Get, Set, and Trap packets can reveal these identifiers associated with network devices.
+* **Tunneling Protocols (e.g., GRE, IPsec)** encapsulate other packets within IP packets to create tunnels. The outer IP header contains the source and destination IP addresses of the tunnel endpoints (logical identifiers of the devices establishing the tunnel). Examining the encapsulated payload might reveal further logical identifiers from the original packets.   
+
 ### ARP (Address Resolution Protocol)
 
 ARP is responsible for resolving IP addresses (Layer 3 addresses) to MAC addresses (Layer 2 addresses) within a local network. Although it helps in Layer 3 communication by finding the necessary Layer 2 address, ARP itself operates at the boundary between Layer 2 and Layer 3. Its messages are encapsulated directly within Layer 2 frames (like Ethernet frames) and do not contain Layer 3 headers. However, its function is crucial for IP (Layer 3) to deliver packets on a local network. Therefore, it's generally considered a Layer 3 protocol or sometimes referred to as a Layer 2.5 protocol due to its position and function.  
