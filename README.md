@@ -8,7 +8,7 @@ This project aims to automate the process of identifying the most suitable deplo
 Basic IP information is related to common network protocols, in order to understand the context for specific communication patterns.
 
 
-## Extract identifiers from a PCAP File
+## Extracting host identifiers
 
 Tools like Wireshark are invaluable for analyzing PCAP files. They provide powerful filtering and dissection capabilities to examine the headers and payloads of different Layer 3 protocols:   
 
@@ -30,10 +30,10 @@ These protocols are used by routers to exchange routing information. Their packe
 * **Network Management Protocols (e.g., SNMP)** operate at the Application Layer (Layer 7), it often relies on UDP (Layer 4) and ultimately IP (Layer 3) for transport. The payload of SNMP packets (PDUs - Protocol Data Units) contains managed object information, which frequently includes logical identifiers like IP addresses, interface names, and system descriptions. Analyzing SNMP Get, Set, and Trap packets can reveal these identifiers associated with network devices.
 * **Tunneling Protocols (e.g., GRE, IPsec)** encapsulate other packets within IP packets to create tunnels. The outer IP header contains the source and destination IP addresses of the tunnel endpoints (logical identifiers of the devices establishing the tunnel). Examining the encapsulated payload might reveal further logical identifiers from the original packets.   
 
-## Environment
+## Data Analytics
 Analyse PCAP files to identify deployment artifact types in a data center network. Main programming language is Python, virtual environments rely on [automatic shell activation](https://devenv.sh/automatic-shell-activation/) using devenv.sh and direnv.
 
-## Initial Setup
+### Initial Setup
 
 It is recommended to prepare a python repository on github and clone the rope into a local folder. Within the local folder prepare the devevlopment environment
 
@@ -72,7 +72,7 @@ We add the dotfiles for the virtual environment to `.gitignore`
 echo ".envrc" >> .gitignore
 ```
 
-## Start analyzing
+### Start analyzing
 
 Before loading data, we initilaise the virtual environment
 
@@ -80,8 +80,6 @@ Before loading data, we initilaise the virtual environment
 uv init && uv venv
 source .devenv/state/venv/bin/activate
 ```
-
-
 
 ## Tools
 
