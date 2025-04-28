@@ -13,7 +13,7 @@ This project aims to automate the process of identifying the most suitable deplo
 
 The analysis focuses on the IP protocol, a fundamental Layer 3 protocol, to understand network topology, communication patterns, and the identities of communicating devices. The project utilizes tools like Wireshark for packet analysis and Python for implementing unsupervised learning algorithms. The following techniques are employed to analyze the PCAP data:
 
-### Clustering
+## Clustering
 
 As a first step, we group network flows or connections based on their similarities without knowing the application types beforehand. We extract various features from the PCAP data at the flow level (a flow is typically defined by a 5-tuple: source IP, destination IP, source port, destination port, protocol) and potentially packet-level statistics. Examples of features include:
 * Number of packets in the flow
@@ -32,7 +32,7 @@ As a first step, we group network flows or connections based on their similariti
 
 After clustering, we analyze the characteristics of each cluster. For example, one cluster might consist of flows with short durations and small packet sizes, potentially indicating control traffic. Another cluster might have long durations and large byte counts, suggesting data transfer. By examining the IP addresses and port numbers within each cluster, we start to infer which applications might be involved.
 
-### Dimensionality Reduction
+## Dimensionality Reduction
 
 In a second step, we reduce the number of features extracted from the PCAP data while preserving the most important information. This helps to visualize complex communication patterns in a lower-dimensional space and make clustering more effective.
 
@@ -42,7 +42,7 @@ In a second step, we reduce the number of features extracted from the PCAP data 
 * **UMAP (Uniform Manifold Approximation and Projection)** Another non-linear technique that often produces better global structure preservation than t-SNE and can be faster.
 * **Interpretation** Visualizing the reduced data can reveal clusters or distinct groups of communication patterns that might not be obvious in the high-dimensional feature space. You can then investigate the original features of these groups to understand the underlying communication characteristics.  
 
-### Anomaly Detection
+## Anomaly Detection
 
 As part of the analysis we identify unusual or unexpected communication patterns that deviate significantly from the norm. This can help detect security breaches, misconfigurations, or performance issues.
 
