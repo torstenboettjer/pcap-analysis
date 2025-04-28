@@ -1,10 +1,6 @@
 # PCAP Analysis
 
-This project aims to automate the process of identifying the most suitable deployment model for a workload when migrating solutions from an existing data center to a hybrid cloud. After capturing the network traffic we aim to extract logical identifiers that help to define the right deployment model for a workload in a hybrid cloud, by analyzing the PCAP file and understanding the network topology, communication patterns, and the identities of the communicating devices. We focus the analysis on:
-
-### IP (Internet Protocol)
-
-This is the fundamental Layer 3 protocol. IP addresses are the primary logical identifiers at Layer 3 and are present in virtually every packet captured in a PCAP file that involves IP communication. The IP header itself contains crucial logical identifiers:   
+This project aims to automate the process of identifying the most suitable deployment model for a workload when migrating solutions from an existing data center to a hybrid cloud. After capturing the network traffic we aim to extract logical identifiers that help to define the right deployment model for a workload in a hybrid cloud, by analyzing the PCAP file and understanding the network topology, communication patterns, and the identities of the communicating devices. We focus our analysis on the IP protocol, the fundamental Layer 3 protocol. IP addresses are the primary logical identifiers at Layer 3 and are present in virtually every packet captured in a PCAP file that involves IP communication. The IP header itself contains crucial logical identifiers:   
 
 * **Source IP Address** identifies the sender of the packet.   
 * **Destination IP Address** Identifies the intended recipient of the packet.   
