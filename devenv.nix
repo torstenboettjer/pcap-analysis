@@ -2,19 +2,25 @@
 
 {
   # https://devenv.sh/basics/
-  env.GREET = "devenv";
+  env.GREET = "pcap-analysis";
 
   # https://devenv.sh/packages/
-  packages = [ pkgs.git ];
+  packages = with pkgs; [
+    git
+    duckdb
+  ];
 
   # https://devenv.sh/languages/
   languages.python = {
     enable = true;
-    # https://devenv.sh/languages/python/
-    # packages = [ pkgs.python39Packages.pip ];
     venv.enable = true;
     venv.requirements = ''
       requests
+      pipx
+      numpy
+      jupyterlab
+      notebook
+      pandas
       # torch
     '';
     # venv.packages = [ pkgs.python39Packages.pip ];
