@@ -16,11 +16,12 @@
     venv.enable = true;
     venv.requirements = ''
       requests
-      pipx
-      numpy
       jupyterlab
       notebook
+      numpy
       pandas
+      pipx
+      spyder
       # torch
     '';
     # venv.packages = [ pkgs.python39Packages.pip ];
