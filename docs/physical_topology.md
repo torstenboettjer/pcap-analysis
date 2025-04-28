@@ -1,6 +1,6 @@
 # Understanding the physical topology of a data center network
 
-By examining traffic information on end devices and network infrastructure, we gain insights into the physical machines present on the data center network. Although it's often used in conjunction with other methods for more comprehensive asset identification,
+Mapping workloads to physical machines requires additional context or correlation with other information like ARP tables or network inventory data. By examining traffic information on end devices and network infrastructure, we gain insights into the physical machines present on the data center network. Although it's often used in conjunction with other methods for more comprehensive asset identification,
 layer 3 protocols, particularly ARP, can be leveraged to identify machines on a data center network. ARP's primary function is to resolve IP addresses to MAC addresses within the same local network segment (Layer 2 broadcast domain).
 
 ## Relevant Layer 3 Protocols
