@@ -6,7 +6,6 @@
 
   # https://devenv.sh/packages/
   packages = with pkgs; [
-    git
     duckdb
   ];
 
@@ -21,7 +20,6 @@
       numpy
       pandas
       pipx
-      spyder
       # torch
     '';
     # venv.packages = [ pkgs.python39Packages.pip ];
