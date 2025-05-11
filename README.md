@@ -13,6 +13,10 @@ This project aims to automate the process of identifying the most suitable deplo
 
 The analysis focuses on the IP protocol, a fundamental Layer 3 protocol, to understand network topology, communication patterns, and the identities of communicating devices. The project utilizes tools like Wireshark for packet analysis and Python for implementing unsupervised learning algorithms. The following techniques are employed to analyze the PCAP data:
 
+## Development Dataset
+
+https://www.kaggle.com/datasets/ymirsky/network-attack-dataset-kitsune
+
 ## Clustering
 
 As a first step, we group network flows or connections based on their similarities without knowing the application types beforehand. We extract various features from the PCAP data at the flow level (a flow is typically defined by a 5-tuple: source IP, destination IP, source port, destination port, protocol) and potentially packet-level statistics. Examples of features include:
