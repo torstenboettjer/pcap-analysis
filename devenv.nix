@@ -20,7 +20,6 @@
       numpy
       pandas
       pipx
-      # torch
     '';
     # venv.packages = [ pkgs.python39Packages.pip ];
     # venv.packages = [ pkgs.python39Packages.pip ];
